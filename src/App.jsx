@@ -10,10 +10,10 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index component={HomePage} />
-          <Route path="search" component={SearchPage} />
-          <Route path="food" component={FoodPage} />
-          <Route path="week-plan" component={WeekPlanPage} />
+          <Route index element={<HomePage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="food" element={<FoodPage />} />
+          <Route path="week-plan" element={<WeekPlanPage />} />
         </Route>
       </Routes>
     </div>
