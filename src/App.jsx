@@ -4,10 +4,13 @@ import SearchPage from "./pages/SearchPage";
 import FoodPage from "./pages/FoodPage";
 import WeekPlanPage from "./pages/WeekPlanPage";
 import Layout from "./components/Layout.jsx";
+import { FoodContext } from './services/FoodContext.js'
+import { useState } from "react";
 
 function App() {
+  const [foodChoose, setFoodChoose] = useState([])
   return (
-    <div>
+    <FoodContext.Provider value={{ foodChoose, setFoodChoose }}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -16,7 +19,7 @@ function App() {
           <Route path="week-plan" element={<WeekPlanPage />} />
         </Route>
       </Routes>
-    </div>
+    </FoodContext.Provider>
   );
 }
 
