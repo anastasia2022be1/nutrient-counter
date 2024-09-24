@@ -1,12 +1,10 @@
-export const saveToLocalStorage = (key, value) => {
+// Сохранение данных в LocalStorage
+export function saveToLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
-};
+}
 
-
-export const loadFromLocalStorage = (key) => {
-    const saved = localStorage.getItem(key);
-    if (saved) {
-        return JSON.parse(saved);
-    }
-    return null;
-};
+// Загрузка данных из LocalStorage
+export function loadFromLocalStorage(key) {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : null;
+}

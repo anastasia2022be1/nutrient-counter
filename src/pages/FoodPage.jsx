@@ -1,40 +1,30 @@
 import { useContext } from "react";
 import { FoodContext } from "../services/FoodContext.js";
+import FoodDetails from "../components/FoodDetails.jsx";
 import { saveToLocalStorage, loadFromLocalStorage } from "../services/localStorageUtils.js";
 
 export default function FoodPage() {
-  const { foodChoose } = useContext(FoodContext);
+    const { foodChoose } = useContext(FoodContext);
 
   function addToPlan() {
-    // Загружаем текущий недельный план или создаем пустой массив, если его нет
-    const savedPlan = loadFromLocalStorage('weekPlan') || [];
-    
-    // Проверяем, не добавлен ли этот продукт уже в план
-    const newPlan = [...savedPlan, foodChoose].filter((item, index, self) =>
-      index === self.findIndex((f) => f.fdcId === item.fdcId)
-    );
+    if (!foodChoose) return; // Если еда не выбрана, выходим
+
+    // Загружаем текущий недельный план или создаем пустой объект, если его нет
+    const savedPlan = loadFromLocalStorage('weekPlan') || {};
+
+    // Добавляем новый элемент в недельный план
+    savedPlan[foodChoose.description] = foodChoose.nutrients;
 
     // Сохраняем обновленный план в Local Storage
-    saveToLocalStorage('weekPlan', newPlan);
+    saveToLocalStorage('weekPlan', savedPlan);
 
-    alert('Product add to WeekPlan!');
+    alert('Product added to WeekPlan!');
   }
 
   return (
     <>
-      {/* Проверка на наличие foodChoose перед рендерингом */}
-      {foodChoose ? (
-        <ul>
-          {foodChoose.map((nutrient) => (
-            <li key={nutrient.foodNutrientId}>
-              {nutrient.nutrientName} : {nutrient.nutrientNumber} {nutrient.unitName.toLowerCase()}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No choose</p>
-      )}
-
+     
+      <FoodDetails />
       <button onClick={addToPlan}>Add to WeekPlan</button>
     </>
   );

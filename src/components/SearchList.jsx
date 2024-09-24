@@ -30,10 +30,15 @@ export default function SearchList({ searchFood }) {
   }, [searchFood]);
 
 
-    function handleClick(food) {
-    setFoodChoose(food.foodNutrients);
-    navigate('../food');
-  }
+  function handleClick(food) {
+  // Передаем как описание, так и питательные вещества еды
+  setFoodChoose({
+    description: food.description,
+    nutrients: food.foodNutrients
+  });
+  navigate('../food');
+}
+
 
 
   return (

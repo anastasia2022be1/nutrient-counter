@@ -1,64 +1,83 @@
-import { useState, useEffect } from 'react';
-import { loadFromLocalStorage, saveToLocalStorage } from '../services/localStorageUtils.js';
+import React, { useEffect, useState } from "react";
+import { loadFromLocalStorage, saveToLocalStorage } from "../services/localStorageUtils.js";
 
 export default function WeekPlanPage() {
-  const [weekPlan, setWeekPlan] = useState([]);
+  const [weekPlan, setWeekPlan] = useState({});// Инициализация состояния для хранения плана на неделю
 
-  // Загружаем план на неделю из Local Storage при загрузке страницы
+  // Загружаем данные из LocalStorage при монтировании компонента(т.е. когда он впервые появляется на экране). Если план не найден, мы инициализируем его пустым объектом.
   useEffect(() => {
-    const savedPlan = loadFromLocalStorage('weekPlan');
-    //console.log(savedPlan);
-    
-    setWeekPlan(Array.isArray(savedPlan) ? savedPlan : []);
+    const savedPlan = loadFromLocalStorage('weekPlan') || {};// Загружаем план из Local Storage или создаем пустой объект
+    setWeekPlan(savedPlan);// Устанавливаем состояние с загруженным планом
   }, []);
 
-  // Функция для удаления продукта из плана
-  const removeFromPlan = (fdcId) => {
-    const updatedPlan = weekPlan.filter(food => food.fdcId !== fdcId);
-    setWeekPlan(updatedPlan);  // Обновляем состояние
-    saveToLocalStorage('weekPlan', updatedPlan);  // Сохраняем в Local Storage
-  };
+  // Удаление всех продуктов из плана
+  function deleteAll() {
+    localStorage.removeItem('weekPlan'); // Очищаем LocalStorage
+    setWeekPlan({}); // Обновляем состояние
+    alert('All products deleted from Week Plan');// Уведомляем пользователя
+  }
+
+  // Удаление конкретного продукта по его описанию
+  function deleteProduct(description) {
+    const updatedPlan = { ...weekPlan }; // Копируем текущее состояние плана
+    delete updatedPlan[description]; // Удаляем продукт из плана по его описанию
+    setWeekPlan(updatedPlan); // Обновляем состояние с новым планом
+    saveToLocalStorage('weekPlan', updatedPlan); // Сохраняем обновлённый план в Local Storage
+    alert(`Product "${description}" deleted from Week Plan`); // Уведомляем пользователя
+  }
+
 
   return (
     <div>
       <h1>Your Week Plan</h1>
 
-      {weekPlan.length > 0 ? (
-        <table border="1" cellPadding="10" cellSpacing="0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Information</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {weekPlan.map((food) => (
-              <tr key={food.fdcId}>
-                {/* Первая колонка: название продукта */}
-                <td>{food.description}</td>
+      <button onClick={deleteAll}>Delete All</button>
 
-                {/* Вторая колонка: информация о питательных веществах */}
-                <td>
-                  <ul>
-                    {food.foodNutrients && food.foodNutrients.map((nutrient) => (
-                      <li key={nutrient.foodNutrientId}>
-                        {nutrient.nutrientName}: {nutrient.nutrientNumber} {nutrient.unitName.toLowerCase()}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-
-                {/* Третья колонка: кнопка для удаления продукта */}
-                <td>
-                  <button onClick={() => removeFromPlan(food.fdcId)}>Remove</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {Object.keys(weekPlan).length === 0 ? (// Проверка, пустой ли план
+        <p>No items in your week plan.</p>// Сообщение, если план пуст
+        //  Object.keys(weekPlan) для проверки, есть ли элементы в weekPlan. Если длина массива, полученного с помощью Object.keys, равна 0, это означает, что объект пуст.
       ) : (
-        <p>No items in the Week Plan.</p>
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Food Description</th>
+                <th>Nutrient Name</th>
+                <th>Value</th>
+                <th>Unit</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {Object.entries(weekPlan).map(([description, nutrients]) => (
+                // Object.entries(weekPlan) для итерации по элементам плана. Каждый элемент weekPlan представлен в виде пары [description, nutrients], где description — это ключ (название продукта), а nutrients — это значение (массив питательных веществ, связанных с этим продуктом)
+                  <React.Fragment key={description}>
+                    {/* React.Fragment: Используется для группировки нескольких элементов без добавления лишних узлов в DOM. Здесь key={description} гарантирует уникальность фрагмента по названию продукта.
+                     Здесь фрагмент используется для группировки строк таблицы, которые содержат данные о каждом продукте. Это позволяет избежать добавления лишнего элемента, сохраняя структуру таблицы, при этом каждый элемент имеет уникальный ключ (key) для правильного управления списком. */}
+                    <tr>
+                      <td rowSpan={nutrients.length}>{description}</td>
+                   {/* rowSpan={nutrients.length}: Используется для объединения ячеек в столбце с описанием продукта, если у него несколько питательных веществ. */}
+                    <td>{nutrients[0].nutrientName}</td>
+                    <td>{nutrients[0].value}</td>
+                    <td>{nutrients[0].unitName}</td>
+                    <td rowSpan={nutrients.length}>
+                      <button onClick={() => deleteProduct(description)}>Delete Product</button>
+                    </td>
+                  </tr>
+                    {nutrients.slice(1).map((nutrient) => (
+                    // nutrients.slice(1): Пропускаем первый элемент (первое питательное вещество уже отображено) и отображаем остальные.
+                      <tr key={nutrient.nutrientId}>
+                        {/* Каждый элемент получает уникальный ключ key={nutrient.nutrientId}, что помогает React эффективно обновлять список. */}
+                      <td>{nutrient.nutrientName}</td>
+                      <td>{nutrient.value}</td>
+                      <td>{nutrient.unitName}</td>
+                    </tr>
+                  ))}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </div>
   );

@@ -8,7 +8,7 @@ import { FoodContext } from './services/FoodContext.js'
 import { useState } from "react";
 
 function App() {
-  const [foodChoose, setFoodChoose] = useState([])
+  const [foodChoose, setFoodChoose] = useState(null);
   return (
     <FoodContext.Provider value={{ foodChoose, setFoodChoose }}>
       <Routes>
