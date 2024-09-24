@@ -1,16 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { FoodContext } from '../services/FoodContext.js';
+import { Container, Row, Col, Card, Button, Alert } from 'react-bootstrap'; // Импорт Bootstrap компонентов
 
 export default function SearchList({ searchFood }) {
-
   const [foodList, setFoodList] = useState(null);
-    const { setFoodChoose } = useContext(FoodContext);
-
+  const { setFoodChoose } = useContext(FoodContext);
   const navigate = useNavigate();
 
-   const apiKey = '0g1AvHGFZOf9ebkQ00ugb8xAY4MX6ov8rUUu0sLm';
+  const apiKey = '0g1AvHGFZOf9ebkQ00ugb8xAY4MX6ov8rUUu0sLm';
 
   useEffect(() => {
     if (searchFood) {
@@ -23,39 +21,44 @@ export default function SearchList({ searchFood }) {
         })
         .then(data => {
           setFoodList(data.foods);
-          console.log(data.foods);
         })
         .catch(error => console.error(error));
     }
   }, [searchFood]);
 
-
   function handleClick(food) {
-  // Передаем как описание, так и питательные вещества еды
-  setFoodChoose({
-    description: food.description,
-    nutrients: food.foodNutrients
-  });
-  navigate('../food');
-}
-
-
+    // Передаем как описание, так и питательные вещества еды
+    setFoodChoose({
+      description: food.description,
+      nutrients: food.foodNutrients
+    });
+    navigate('../food');
+  }
 
   return (
-     <section>
-        {foodList == null ? (
-          <h1>No food search</h1>
-        ) : (
-          foodList.map(food => (
-            <div key={food.fdcId}>
-              <h2>{food.description}</h2>
-              <h3>{food.brandName}</h3>
-              <h4>{food.brandOwner}</h4>
-
-              <button onClick={() => handleClick(food)}>Food Nutrients</button>
-            </div>
-          ))
-        )}
-      </section>
-  )
+    <Container className="mt-4">
+      {foodList == null ? (
+        <Alert variant="warning">No food search</Alert> // Используем предупреждение, если ничего не найдено
+      ) : (
+        <Row>
+          {foodList.map((food) => (
+            <Col md={6} lg={4} key={food.fdcId} className="mb-4"> {/* Responsive колонки */}
+              <Card>
+                <Card.Body>
+                  <Card.Title>{food.description}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">{food.brandName}</Card.Subtitle>
+                  <Card.Text>
+                    <strong>Brand Owner:</strong> {food.brandOwner || 'N/A'}
+                  </Card.Text>
+                  <Button variant="primary" onClick={() => handleClick(food)}>
+                    View Nutrients
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
+    </Container>
+  );
 }

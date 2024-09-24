@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { loadFromLocalStorage, saveToLocalStorage } from "../services/localStorageUtils.js";
+import { Container, Table, Button, Alert } from 'react-bootstrap'; 
+
 
 export default function WeekPlanPage() {
   const [weekPlan, setWeekPlan] = useState({});// Инициализация состояния для хранения плана на неделю
@@ -28,17 +30,20 @@ export default function WeekPlanPage() {
 
 
   return (
-    <div>
-      <h1>Your Week Plan</h1>
+    <Container className="mt-4">
+      <h1 className="text-center mb-4">Your Week Plan</h1>
 
-      <button onClick={deleteAll}>Delete All</button>
+      {/* Кнопка для удаления всех продуктов */}
+      <Button variant="danger" onClick={deleteAll} className="mb-4">
+        Delete All
+      </Button>
 
       {Object.keys(weekPlan).length === 0 ? (// Проверка, пустой ли план
-        <p>No items in your week plan.</p>// Сообщение, если план пуст
+        <Alert variant="warning">No items in your week plan.</Alert>// Сообщение, если план пуст
         //  Object.keys(weekPlan) для проверки, есть ли элементы в weekPlan. Если длина массива, полученного с помощью Object.keys, равна 0, это означает, что объект пуст.
       ) : (
         <>
-          <table>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>Food Description</th>
@@ -61,7 +66,12 @@ export default function WeekPlanPage() {
                     <td>{nutrients[0].value}</td>
                     <td>{nutrients[0].unitName}</td>
                     <td rowSpan={nutrients.length}>
-                      <button onClick={() => deleteProduct(description)}>Delete Product</button>
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteProduct(description)}
+                      >
+                        Delete Product
+                      </Button>
                     </td>
                   </tr>
                     {nutrients.slice(1).map((nutrient) => (
@@ -76,9 +86,9 @@ export default function WeekPlanPage() {
                 </React.Fragment>
               ))}
             </tbody>
-          </table>
+          </Table>
         </>
       )}
-    </div>
+    </Container>
   );
 }
