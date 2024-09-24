@@ -7,6 +7,8 @@ export default function WeekPlanPage() {
   // Загружаем план на неделю из Local Storage при загрузке страницы
   useEffect(() => {
     const savedPlan = loadFromLocalStorage('weekPlan');
+    //console.log(savedPlan);
+    
     setWeekPlan(Array.isArray(savedPlan) ? savedPlan : []);
   }, []);
 
