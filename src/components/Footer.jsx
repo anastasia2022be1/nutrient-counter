@@ -11,16 +11,16 @@ export default function Footer() {
             <h5>Follow me</h5>
             <div className="social-links">
               {/* Социальные ссылки */}
-              <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
+              <a href="https://github.com/anastasia2022be1/nutrient-counter" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                 <FaGithub size={30} />
               </a>
-              <a href="https://facebook.com/your-page" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
+              <a href="https://facebook.com/sevastyanova.a" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                 <FaFacebook size={30} />
               </a>
-              <a href="https://linkedin.com/in/your-account" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
+              <a href="https://linkedin.com/in/anastasia-sevastianova" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                 <FaLinkedin size={30} />
               </a>
-              <a href="https://instagram.com/your-account" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
+              <a href="https://instagram.com/sevastianova_anastasia_" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                 <FaInstagram size={30} />
               </a>
             </div>
