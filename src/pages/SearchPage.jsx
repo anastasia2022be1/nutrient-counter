@@ -1,25 +1,24 @@
 import { useState } from 'react';
 import SearchBar from '../components/SearchBar.jsx';
 import SearchList from '../components/SearchList.jsx';
-import { Container, Row, Col } from 'react-bootstrap'; // Импортируем компоненты Bootstrap
+import { Row, Col } from 'react-bootstrap'; // container не нужен
 
 export default function SearchPage() {
   const [searchFood, setSearchFood] = useState('');
 
   return (
-    <Container className="mt-5"> {/* Добавляем контейнер с верхним отступом */}
-      <Row className="justify-content-center"> {/* Центрируем строку с поисковой строкой */}
-        <Col md={8}> {/* Указываем размер колонки для средней ширины экрана */}
+    <div className="h-100">
+      <Row className="justify-content-center mt-4">
+        <Col md={8}>
           <SearchBar setSearchFood={setSearchFood} />
         </Col>
       </Row>
 
-      <Row className="mt-4"> {/* Добавляем верхний отступ для списка */}
+      <Row className="mt-4">
         <Col>
           <SearchList searchFood={searchFood} />
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
-

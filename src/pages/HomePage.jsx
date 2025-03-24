@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
-    <div className="container mt-5">
+    <div className="h-100">
       {/* Заголовок приветствия */}
-      <h1 className="text-center">Welcome to Nutrient App!</h1>
+      <h1 className="text-center mt-4">Welcome to Nutrient App!</h1>
+
       {/* Описание приложения */}
       <p className="text-center">
         Nutrient App is a user-friendly app that helps you monitor your diet and
@@ -16,14 +17,16 @@ function HomePage() {
 
       <div className="row mt-4">
         {/* Карточка для поиска продуктов */}
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Product Search</h5>
-              <p className="card-text">
-                Easily find food and explore their nutritional values.
-              </p>
-              <Link to="/search" className="btn btn-primary">
+        <div className="col-md-4 mb-3">
+          <div className="card h-100">
+            <div className="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 className="card-title">Product Search</h5>
+                <p className="card-text">
+                  Easily find food and explore their nutritional values.
+                </p>
+              </div>
+              <Link to="/search" className="btn btn-primary mt-3">
                 Start Searching
               </Link>
             </div>
@@ -31,14 +34,16 @@ function HomePage() {
         </div>
 
         {/* Карточка для планирования рациона */}
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Diet Planning</h5>
-              <p className="card-text">
-                Create and manage your personalized meal plan today!
-              </p>
-              <Link to="/week-plan" className="btn btn-primary">
+        <div className="col-md-4 mb-3">
+          <div className="card h-100">
+            <div className="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 className="card-title">Diet Planning</h5>
+                <p className="card-text">
+                  Create and manage your personalized meal plan today!
+                </p>
+              </div>
+              <Link to="/week-plan" className="btn btn-primary mt-3">
                 Go to Plan
               </Link>
             </div>
@@ -46,14 +51,16 @@ function HomePage() {
         </div>
 
         {/* Карточка для изучения питательных веществ */}
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Learn About Nutrients</h5>
-              <p className="card-text">
-                Get to know nutrients and optimize your dietary choices.
-              </p>
-              <Link to="/food" className="btn btn-primary">
+        <div className="col-md-4 mb-3">
+          <div className="card h-100">
+            <div className="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h5 className="card-title">Learn About Nutrients</h5>
+                <p className="card-text">
+                  Get to know nutrients and optimize your dietary choices.
+                </p>
+              </div>
+              <Link to="/food" className="btn btn-primary mt-3">
                 View Foods
               </Link>
             </div>

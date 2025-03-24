@@ -30,7 +30,7 @@ export default function WeekPlanPage() {
 
 
   return (
-    <Container className="mt-4">
+    <div className="h-100">
       <h1 className="text-center mb-4">Your Week Plan</h1>
 
       {/* Кнопка для удаления всех продуктов */}
@@ -89,6 +89,6 @@ export default function WeekPlanPage() {
           </Table>
         </>
       )}
-    </Container>
+    </div>
   );
 }

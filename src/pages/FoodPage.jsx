@@ -23,7 +23,7 @@ export default function FoodPage() {
   }
 
   return (
-    <Container className="mt-4">
+    <Container className="h-100 mt-4">
       {/* Проверка на наличие выбранного продукта, если нет — выводим сообщение */}
       {!foodChoose ? (
         <Alert variant="warning">No food selected. Please choose a product.</Alert>

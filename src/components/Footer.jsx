@@ -1,16 +1,15 @@
 import React from 'react';
-import { FaGithub, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa'; // Импортируем иконки из react-icons
-import { Container, Row, Col } from 'react-bootstrap'; // Импортируем компоненты из react-bootstrap
+import { FaGithub, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white text-center mt-5 py-3">
+    <footer className="bg-dark text-white text-center mt-auto py-3">
       <Container>
         <Row>
           <Col>
             <h5>Follow me</h5>
             <div className="social-links">
-              {/* Социальные ссылки */}
               <a href="https://github.com/anastasia2022be1/nutrient-counter" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
                 <FaGithub size={30} />
               </a>
@@ -26,7 +25,6 @@ export default function Footer() {
             </div>
           </Col>
         </Row>
-        {/* Уведомление о праве собственности */}
         <Row className="mt-3">
           <Col>
             <p>&copy; {new Date().getFullYear()} Nutrient App.</p>

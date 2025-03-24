@@ -12,7 +12,7 @@ function App() {
   const [foodChoose, setFoodChoose] = useState(null);
   return (
     <FoodContext.Provider value={{ foodChoose, setFoodChoose }}>
-      <div className="container mt-4">
+      <div className="d-flex flex-column min-vh-100">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
