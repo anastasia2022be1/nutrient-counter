@@ -43,7 +43,7 @@ You can view the live application at [Nutrient App Live](https://nutrient-app.on
 ## Project Structure
 
 The project structure is as follows:
-
+```
 /src
 ├── /components │
 ├── Header.jsx │
@@ -62,7 +62,7 @@ The project structure is as follows:
 ├── localStorageUtils.js
 ├── App.jsx
 └── main.jsx
-
+```
 ## Contributing
 
 Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
