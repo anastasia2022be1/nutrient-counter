@@ -1,92 +1,144 @@
 # Nutrient App
 
-Welcome to the **Nutrient App**! This web application is designed to help you track and manage your diet by providing detailed nutritional information about various foods. The app uses the USDA FoodData Central API to fetch food data, making it easy for users to explore different food items and their nutritional values.
+Nutrient App is a React application for searching foods, reviewing nutrient
+details, and building a simple weekly meal plan. Food data is provided by the
+USDA FoodData Central API.
 
-## Table of Contents
-
-- [Features](#features)
-- [API](#api)
-- [Technologies Used](#technologies-used)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
+Live site: [https://nutrient-app.onrender.com/](https://nutrient-app.onrender.com/)
 
 ## Features
 
-- **Product Search**: Quickly search for various foods and view their nutrients.
-- **Diet Planning**: Add selected foods to your weekly meal plan.
-- **Nutritional Information**: Detailed view of food items and their nutritional content.
+- Search foods with the USDA FoodData Central API.
+- View nutrient details for a selected food.
+- Add foods to a weekly meal plan by day and meal.
+- Track weekly totals for calories, protein, carbohydrates, and fat.
+- Store the week plan in local storage.
+- Responsive layout built with React Bootstrap.
 
-## API
+## Tech Stack
 
-The Nutrient App utilizes the [USDA FoodData Central API](https://fdc.nal.usda.gov/api-guide.html) to fetch food data. This API provides access to a comprehensive database of food items and their nutritional information.
+- React
+- Vite
+- React Router
+- React Bootstrap
+- React Icons
+- Local Storage
+- USDA FoodData Central API
 
-## Technologies Used
+## Getting Started
 
-- **React**: A JavaScript library for building user interfaces.
-- **React Router**: For routing within the application.
-- **React Bootstrap**: For responsive styling and layout.
-- **React Icons**: For social media icons and other graphical elements.
-- **Local Storage**: For saving user data and meal plans.
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```bash
+cp .env.example .env.local
+```
+
+Add your USDA API key to `.env.local`:
+
+```env
+VITE_USDA_API_KEY=your_usda_api_key_here
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run ESLint:
+
+```bash
+npm run lint
+```
+
+## Environment Variables
+
+Vite only exposes client-side environment variables that start with `VITE_`.
+
+Required variable:
+
+```env
+VITE_USDA_API_KEY=your_usda_api_key_here
+```
+
+The real `.env.local` file is ignored by Git. Use `.env.example` as the template
+for local setup and deployment configuration.
 
 ## Deployment
 
-You can view the live application at [Nutrient App Live](https://nutrient-app.onrender.com/).
+The app is deployed on Render as a static site.
 
-## Usage
+Render settings:
 
-- **Search for Foods**: Use the search bar on the home page to find foods and view their nutritional information.
-- **Create a Meal Plan**: Add foods to your weekly meal plan and manage your dietary intake.
-- **Learn About Nutrients**: Explore various nutrients and their benefits to make informed dietary choices.
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Environment variable: `VITE_USDA_API_KEY`
+
+After adding or changing `VITE_USDA_API_KEY` on Render, rebuild and redeploy the
+site because Vite injects environment variables during the build step.
 
 ## Project Structure
 
-The project structure is as follows:
+```text
+src/
+  components/
+    FoodDetails.jsx
+    Footer.jsx
+    Header.jsx
+    Layout.jsx
+    SearchBar.jsx
+    SearchList.jsx
+  pages/
+    FoodPage.jsx
+    HomePage.jsx
+    SearchPage.jsx
+    WeekPlanPage.jsx
+  services/
+    FoodContext.js
+    localStorageUtils.js
+    weekPlanUtils.js
+  App.jsx
+  main.jsx
+  styles.css
 ```
-/src
-├── /components │
-├── Header.jsx │
-├── Footer.jsx │
-├── SearchBar.jsx │
-├── SearchList.jsx │
-├── FoodDetails.jsx |
-├── Layout.jsx
-├── /pages │
-├── HomePage.jsx │
-├── SearchPage.jsx │
-├── FoodPage.jsx │
-├── WeekPlanPage.jsx
-├── /services │
-├── FoodContext.js
-├── localStorageUtils.js
-├── App.jsx
-└── main.jsx
-```
+
+## Notes
+
+`VITE_USDA_API_KEY` is not stored in the repository, but it is still included in
+the compiled frontend bundle. For a production app that needs to keep the API
+key private, route USDA requests through a backend or serverless proxy.
+
 ## Contributing
 
-Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
-
-### To Contribute:
-
 1. Fork the repository.
-2. Create your feature branch:
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
+2. Create a feature branch:
+
+```bash
+git checkout -b feature/your-feature
+```
+
 3. Commit your changes:
 
 ```bash
-git commit -m 'Add some feature'
-
+git commit -m "Add your feature"
 ```
 
-4. Push to the branch:
+4. Push the branch:
 
 ```bash
-git push origin featutere/YourFeature
+git push origin feature/your-feature
 ```
 
-5. Open a pull request
-
-Thank you for checking out the Nutrient App! I hope you find it helpful in managing your dietary needs.
+5. Open a pull request.
