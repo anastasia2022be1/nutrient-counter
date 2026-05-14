@@ -1,40 +1,38 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
-  const [isNavCollapsed, setIsNavCollapsed] = useState(true); // Состояние для управления видимостью меню
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
-  const handleNavToggle = () => {
-    setIsNavCollapsed(!isNavCollapsed); // Переключаем состояние
-  };
+  const navLinkClass = ({ isActive }) => `nav-link${isActive ? ' active' : ''}`;
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg app-navbar">
       <div className="container">
         <NavLink className="navbar-brand" to="/">Nutrient App</NavLink>
         <button
           className="navbar-toggler"
           type="button"
           aria-controls="navbarNav"
-          aria-expanded={!isNavCollapsed} // Используем состояние для управления значением
+          aria-expanded={!isNavCollapsed}
           aria-label="Toggle navigation"
-          onClick={handleNavToggle} // Обработчик клика
+          onClick={() => setIsNavCollapsed(!isNavCollapsed)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Home</NavLink>
+              <NavLink className={navLinkClass} to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/search">Search</NavLink>
+              <NavLink className={navLinkClass} to="/search">Search</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/food">Food</NavLink>
+              <NavLink className={navLinkClass} to="/food">Food</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/week-plan">Week Plan</NavLink>
+              <NavLink className={navLinkClass} to="/week-plan">Week Plan</NavLink>
             </li>
           </ul>
         </div>

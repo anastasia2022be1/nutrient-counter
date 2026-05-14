@@ -1,40 +1,37 @@
-import { useContext } from "react";
-import { FoodContext } from "../services/FoodContext.js";
-import FoodDetails from "../components/FoodDetails.jsx";
-import { saveToLocalStorage, loadFromLocalStorage } from "../services/localStorageUtils.js";
-import { Container, Button, Alert } from 'react-bootstrap'; // Импорт Bootstrap компонентов
+import { useContext, useState } from 'react';
+import { FoodContext } from '../services/FoodContext.js';
+import FoodDetails from '../components/FoodDetails.jsx';
+import { saveToLocalStorage, loadFromLocalStorage } from '../services/localStorageUtils.js';
+import { Button, Alert } from 'react-bootstrap';
 
 export default function FoodPage() {
   const { foodChoose } = useContext(FoodContext);
+  const [message, setMessage] = useState('');
 
   function addToPlan() {
-    if (!foodChoose) return; // Если еда не выбрана, выходим
+    if (!foodChoose) {
+      return;
+    }
 
-    // Загружаем текущий недельный план или создаем пустой объект, если его нет
     const savedPlan = loadFromLocalStorage('weekPlan') || {};
-
-    // Добавляем новый элемент в недельный план
-    savedPlan[foodChoose.description] = foodChoose.nutrients;
-
-    // Сохраняем обновленный план в Local Storage
+    savedPlan[foodChoose.description] = foodChoose.nutrients || [];
     saveToLocalStorage('weekPlan', savedPlan);
-
-    alert('Product added to WeekPlan!');
+    setMessage('Product added to Week Plan.');
   }
 
   return (
-    <Container className="h-100 mt-4">
-      {/* Проверка на наличие выбранного продукта, если нет — выводим сообщение */}
+    <div className="page-stack">
       {!foodChoose ? (
         <Alert variant="warning">No food selected. Please choose a product.</Alert>
       ) : (
         <>
           <FoodDetails />
-          <Button variant="success" onClick={addToPlan} className="mt-3">
-            Add to WeekPlan
+          {message && <Alert variant="success">{message}</Alert>}
+          <Button variant="success" onClick={addToPlan} className="align-self-start">
+            Add to Week Plan
           </Button>
         </>
       )}
-    </Container>
+    </div>
   );
 }

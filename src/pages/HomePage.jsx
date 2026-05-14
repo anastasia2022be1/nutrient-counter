@@ -1,66 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { FaCalendarAlt, FaSearch, FaSeedling } from 'react-icons/fa';
 
 function HomePage() {
   return (
-    <div className="h-100">
-      {/* Заголовок приветствия */}
-      <h1 className="text-center mt-4">Welcome to Nutrient App!</h1>
+    <div className="home-page">
+      <section className="app-hero text-center">
+        <p className="eyebrow">Nutrition made easier</p>
+        <h1>Welcome to Nutrient App</h1>
+        <p className="hero-copy">
+          Track foods, compare nutrients, and keep a simple weekly plan for
+          more balanced everyday meals.
+        </p>
+        <div className="hero-actions">
+          <Link to="/search" className="btn btn-success">
+            Start Searching
+          </Link>
+          <Link to="/week-plan" className="btn btn-outline-success">
+            View Week Plan
+          </Link>
+        </div>
+      </section>
 
-      {/* Описание приложения */}
-      <p className="text-center">
-        Nutrient App is a user-friendly app that helps you monitor your diet and
-        improve your nutrition. Designed to make your diet easier to manage and
-        more balanced. Nutrient App will help you keep track of the foods you
-        consume and monitor their nutritional properties.
-      </p>
-
-      <div className="row mt-4">
-        {/* Карточка для поиска продуктов */}
-        <div className="col-md-4 mb-3">
-          <div className="card h-100">
-            <div className="card-body d-flex flex-column justify-content-between">
+      <div className="row g-4 mt-1">
+        <div className="col-md-4">
+          <div className="card feature-card h-100">
+            <div className="card-body d-flex flex-column">
+              <FaSearch className="feature-icon" aria-hidden="true" />
               <div>
                 <h5 className="card-title">Product Search</h5>
                 <p className="card-text">
-                  Easily find food and explore their nutritional values.
+                  Find foods quickly and compare their nutrient values.
                 </p>
               </div>
-              <Link to="/search" className="btn btn-primary mt-3">
+              <Link to="/search" className="btn btn-primary mt-auto">
                 Start Searching
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Карточка для планирования рациона */}
-        <div className="col-md-4 mb-3">
-          <div className="card h-100">
-            <div className="card-body d-flex flex-column justify-content-between">
+        <div className="col-md-4">
+          <div className="card feature-card h-100">
+            <div className="card-body d-flex flex-column">
+              <FaCalendarAlt className="feature-icon" aria-hidden="true" />
               <div>
                 <h5 className="card-title">Diet Planning</h5>
                 <p className="card-text">
-                  Create and manage your personalized meal plan today!
+                  Save selected products and manage your weekly plan.
                 </p>
               </div>
-              <Link to="/week-plan" className="btn btn-primary mt-3">
+              <Link to="/week-plan" className="btn btn-primary mt-auto">
                 Go to Plan
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Карточка для изучения питательных веществ */}
-        <div className="col-md-4 mb-3">
-          <div className="card h-100">
-            <div className="card-body d-flex flex-column justify-content-between">
+        <div className="col-md-4">
+          <div className="card feature-card h-100">
+            <div className="card-body d-flex flex-column">
+              <FaSeedling className="feature-icon" aria-hidden="true" />
               <div>
                 <h5 className="card-title">Learn About Nutrients</h5>
                 <p className="card-text">
-                  Get to know nutrients and optimize your dietary choices.
+                  Review selected food details in a cleaner nutrient view.
                 </p>
               </div>
-              <Link to="/food" className="btn btn-primary mt-3">
+              <Link to="/food" className="btn btn-primary mt-auto">
                 View Foods
               </Link>
             </div>
