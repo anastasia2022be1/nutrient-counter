@@ -89,7 +89,10 @@ body {
 .feature-card,
 .food-card,
 .details-card,
+.planner-panel,
 .search-panel,
+.summary-card,
+.day-card,
 .table-shell {
   background: var(--app-surface);
   border: 1px solid var(--app-border);
@@ -159,6 +162,105 @@ body {
   justify-content: space-between;
 }
 
+.planner-panel {
+  padding: 1.25rem;
+}
+
+.planner-panel .form-label {
+  color: var(--app-ink);
+  font-weight: 700;
+}
+
+.summary-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.summary-card {
+  padding: 1.1rem;
+}
+
+.summary-card span,
+.summary-card small {
+  color: var(--app-muted);
+  display: block;
+}
+
+.summary-card strong {
+  color: var(--app-green-dark);
+  display: block;
+  font-size: 1.85rem;
+  line-height: 1.1;
+  margin-top: 0.35rem;
+}
+
+.week-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.day-card {
+  padding: 1rem;
+}
+
+.day-card h2 {
+  color: var(--app-green-dark);
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.meal-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.meal-block {
+  background: #f8fbf7;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  padding: 0.9rem;
+}
+
+.meal-block h3 {
+  color: var(--app-ink);
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.meal-empty {
+  color: var(--app-muted);
+  margin-bottom: 0;
+}
+
+.planned-food-list {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.planned-food-list li {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.planned-food-list span {
+  font-weight: 600;
+}
+
+.planned-food-list .btn-link {
+  color: #b42318;
+  padding: 0;
+  text-decoration: none;
+}
+
 .table-shell {
   overflow: hidden;
 }
@@ -213,5 +315,26 @@ body {
   .input-group .form-control {
     border-radius: 0.375rem !important;
     width: 100%;
+  }
+
+  .planned-food-list li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .week-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
   }
 }
